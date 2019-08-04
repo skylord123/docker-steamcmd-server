@@ -6,49 +6,6 @@ if [ ! -f ${STEAMCMD_DIR}/steamcmd.sh ]; then
     rm ${STEAMCMD_DIR}/steamcmd_linux.tar.gz
 fi
 
-echo "---Update SteamCMD---"
-if [ "${USERNAME}" == "" ]; then
-    ${STEAMCMD_DIR}/steamcmd.sh \
-    +login anonymous \
-    +quit
-else
-    ${STEAMCMD_DIR}/steamcmd.sh \
-    +login ${USERNAME} ${PASSWRD} \
-    +quit
-fi
-
-echo "---Update Server---"
-if [ "${USERNAME}" == "" ]; then
-    if [ "${VALIDATE}" == "true" ]; then
-    	echo "---Validating installation---"
-        ${STEAMCMD_DIR}/steamcmd.sh \
-        +login anonymous \
-        +force_install_dir ${SERVER_DIR} \
-        +app_update ${GAME_ID} validate \
-        +quit
-    else
-        ${STEAMCMD_DIR}/steamcmd.sh \
-        +login anonymous \
-        +force_install_dir ${SERVER_DIR} \
-        +app_update ${GAME_ID} \
-        +quit
-    fi
-else
-    if [ "${VALIDATE}" == "true" ]; then
-    	echo "---Validating installation---"
-        ${STEAMCMD_DIR}/steamcmd.sh \
-        +login ${USERNAME} ${PASSWRD} \
-        +force_install_dir ${SERVER_DIR} \
-        +app_update ${GAME_ID} validate \
-        +quit
-    else
-        ${STEAMCMD_DIR}/steamcmd.sh \
-        +login ${USERNAME} ${PASSWRD} \
-        +force_install_dir ${SERVER_DIR} \
-        +app_update ${GAME_ID} \
-        +quit
-    fi
-fi
 
 echo "---Prepare Server---"
 chmod -R 770 ${DATA_DIR}
